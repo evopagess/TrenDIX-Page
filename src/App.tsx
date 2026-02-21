@@ -125,6 +125,12 @@ export default function App() {
         {/* SECTION 1: HEADER / HEADLINE - Parallax Hero */}
         <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 pt-32 pb-12 overflow-hidden z-10">
 
+          {/* Perfomant CSS-only Background Effects */}
+          {/* Subtle Dot Pattern with Gradient Mask */}
+          <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:24px_24px] opacity-40 z-0 [mask-image:linear-gradient(to_bottom,white_20%,transparent_100%)] pointer-events-none"></div>
+          {/* Static Ambient Glow */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[400px] bg-gradient-to-b from-pink-100/30 to-transparent blur-[100px] pointer-events-none z-0"></div>
+
           {/* Parallax Container applied to the main Hero content */}
           <m.div
             style={{ y: heroY, opacity: heroOpacity, scale: heroScale, willChange: "transform, opacity" }}
