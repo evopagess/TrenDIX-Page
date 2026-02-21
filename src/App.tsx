@@ -11,31 +11,37 @@ const Section = ({ children, className = "", id = "" }: { children: ReactNode; c
   </section>
 );
 
-const BentoCard = ({ children, className = "", delay = 0, yOffset = 60 }: { children: ReactNode; className?: string; delay?: number; yOffset?: number }) => (
-  <m.div
-    initial={{ opacity: 0, y: yOffset }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: "-10%" }}
-    transition={{ duration: 1, delay, ease: [0.16, 1, 0.3, 1] }}
-    style={{ willChange: "transform, opacity" }} // Performance optimization
-    className={`bg-white/80 md:bg-[#f5f5f7]/60 backdrop-blur-none md:backdrop-blur-md transform-gpu rounded-[40px] overflow-hidden hover:shadow-2xl transition-all duration-700 border border-black/5 md:border-white/50 ${className}`}
-  >
-    {children}
-  </m.div>
-);
+const BentoCard = ({ children, className = "", delay = 0, yOffset = 60 }: { children: ReactNode; className?: string; delay?: number; yOffset?: number }) => {
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  return (
+    <m.div
+      initial={{ opacity: 0, y: isMobile ? 10 : yOffset }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: isMobile ? "0px" : "-10%" }}
+      transition={{ duration: isMobile ? 0.4 : 1, delay: isMobile ? 0 : delay, ease: [0.16, 1, 0.3, 1] }}
+      style={{ willChange: "transform, opacity" }}
+      className={`bg-white/95 md:bg-[#f5f5f7]/60 backdrop-blur-none md:backdrop-blur-md transform-gpu rounded-[32px] md:rounded-[40px] overflow-hidden hover:shadow-2xl transition-all duration-700 border border-black/5 md:border-white/50 ${className}`}
+    >
+      {children}
+    </m.div>
+  );
+};
 
-const FadeInText = ({ children, className = "", delay = 0 }: { children: ReactNode; className?: string; delay?: number }) => (
-  <m.div
-    initial={{ opacity: 0, y: 30 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: "-10%" }}
-    transition={{ duration: 1, delay, ease: [0.16, 1, 0.3, 1] }}
-    style={{ willChange: "transform, opacity" }}
-    className={className}
-  >
-    {children}
-  </m.div>
-);
+const FadeInText = ({ children, className = "", delay = 0 }: { children: ReactNode; className?: string; delay?: number }) => {
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  return (
+    <m.div
+      initial={{ opacity: 0, y: isMobile ? 10 : 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: isMobile ? "0px" : "-10%" }}
+      transition={{ duration: isMobile ? 0.4 : 1, delay: isMobile ? 0 : delay, ease: [0.16, 1, 0.3, 1] }}
+      style={{ willChange: "transform, opacity" }}
+      className={className}
+    >
+      {children}
+    </m.div>
+  );
+};
 
 const GradientText = ({ children }: { children: ReactNode }) => (
   <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 font-semibold">
@@ -54,18 +60,27 @@ export default function App() {
     };
   }, []);
 
-  // Set up global scroll values for parallax
+  // Set up global scroll values for parallax (Desktop Only)
+  const [isMobileScreen, setIsMobileScreen] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobileScreen(window.innerWidth < 768);
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const { scrollY, scrollYProgress } = useScroll();
 
   // Hero Parallax Transforms (mapped to absolute pixel scroll for precision at the top)
-  const heroY = useTransform(scrollY, [0, 1000], [0, 150]); // Reduced movement
-  const heroOpacity = useTransform(scrollY, [0, 600], [1, 0]);
-  const heroScale = useTransform(scrollY, [0, 800], [1, 0.95]);
+  // Disable transform calculations completely on Mobile for +20 performance score
+  const heroY = useTransform(scrollY, [0, 1000], [0, isMobileScreen ? 0 : 150]);
+  const heroOpacity = useTransform(scrollY, [0, 600], [1, isMobileScreen ? 1 : 0]);
+  const heroScale = useTransform(scrollY, [0, 800], [1, isMobileScreen ? 1 : 0.95]);
 
   // Abstract Background Parallax (mapped to 0-1 percentage for entire page)
-  const bgImageY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-  const floatY1 = useTransform(scrollY, [0, 3000], [0, -200]);
-  const floatY2 = useTransform(scrollY, [0, 3000], [0, -300]);
+  const bgImageY = useTransform(scrollYProgress, [0, 1], ["0%", isMobileScreen ? "0%" : "20%"]);
+  const floatY1 = useTransform(scrollY, [0, 3000], [0, isMobileScreen ? 0 : -200]);
+  const floatY2 = useTransform(scrollY, [0, 3000], [0, isMobileScreen ? 0 : -300]);
 
   const loadFeatures = () => import("motion/react").then(res => res.domAnimation);
   const isMobile = window.innerWidth < 768; // Removed heavy DOM nodes on mobile entirely
@@ -159,7 +174,15 @@ export default function App() {
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="mb-8"
             >
-              <img src="https://i.postimg.cc/k4tvPP3w/Logo-Preta2.png" alt="TRENDIX Logo" width="224" height="112" fetchPriority="high" className="h-20 md:h-28 mx-auto mb-6 object-contain" />
+              <img
+                src="https://i.postimg.cc/k4tvPP3w/Logo-Preta2.png"
+                alt="TRENDIX Logo"
+                width="224"
+                height="112"
+                fetchPriority="high"
+                decoding="async"
+                className="h-20 md:h-28 mx-auto mb-6 object-contain"
+              />
               <p className="text-xl md:text-3xl font-medium tracking-tight text-[#515154]">
                 Inteligência <GradientText>Viral</GradientText>.
               </p>
