@@ -127,9 +127,17 @@ export default function App() {
 
           {/* Perfomant CSS-only Background Effects */}
           {/* Subtle Dot Pattern with Gradient Mask */}
-          <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:24px_24px] opacity-40 z-0 [mask-image:linear-gradient(to_bottom,white_20%,transparent_100%)] pointer-events-none"></div>
+          <div
+            className="absolute inset-0 opacity-60 z-0 pointer-events-none"
+            style={{
+              backgroundImage: 'radial-gradient(#c0c0c8 1.5px, transparent 1.5px)',
+              backgroundSize: '32px 32px',
+              WebkitMaskImage: 'linear-gradient(to bottom, white 40%, transparent 100%)',
+              maskImage: 'linear-gradient(to bottom, white 40%, transparent 100%)'
+            }}
+          ></div>
           {/* Static Ambient Glow */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[400px] bg-gradient-to-b from-pink-100/30 to-transparent blur-[100px] pointer-events-none z-0"></div>
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[500px] bg-gradient-to-b from-pink-300/20 via-purple-300/10 to-transparent blur-[80px] pointer-events-none z-0"></div>
 
           {/* Parallax Container applied to the main Hero content */}
           <m.div
