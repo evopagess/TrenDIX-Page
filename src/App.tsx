@@ -13,14 +13,24 @@ const Section = ({ children, className = "", id = "" }: { children: ReactNode; c
 
 const BentoCard = ({ children, className = "", delay = 0, yOffset = 60 }: { children: ReactNode; className?: string; delay?: number; yOffset?: number }) => {
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  const baseClassName = `bg-white/95 md:bg-[#f5f5f7]/60 backdrop-blur-none md:backdrop-blur-md transform-gpu rounded-[32px] md:rounded-[40px] overflow-hidden hover:shadow-2xl transition-all duration-700 border border-black/5 md:border-white/50 ${className}`;
+
+  if (isMobile) {
+    return (
+      <div className={baseClassName}>
+        {children}
+      </div>
+    );
+  }
+
   return (
     <m.div
-      initial={{ opacity: 0, y: isMobile ? 10 : yOffset }}
+      initial={{ opacity: 0, y: yOffset }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: isMobile ? "0px" : "-10%" }}
-      transition={{ duration: isMobile ? 0.4 : 1, delay: isMobile ? 0 : delay, ease: [0.16, 1, 0.3, 1] }}
+      viewport={{ once: true, margin: "-10%" }}
+      transition={{ duration: 1, delay, ease: [0.16, 1, 0.3, 1] }}
       style={{ willChange: "transform, opacity" }}
-      className={`bg-white/95 md:bg-[#f5f5f7]/60 backdrop-blur-none md:backdrop-blur-md transform-gpu rounded-[32px] md:rounded-[40px] overflow-hidden hover:shadow-2xl transition-all duration-700 border border-black/5 md:border-white/50 ${className}`}
+      className={baseClassName}
     >
       {children}
     </m.div>
@@ -29,12 +39,21 @@ const BentoCard = ({ children, className = "", delay = 0, yOffset = 60 }: { chil
 
 const FadeInText = ({ children, className = "", delay = 0 }: { children: ReactNode; className?: string; delay?: number }) => {
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
+  if (isMobile) {
+    return (
+      <div className={className}>
+        {children}
+      </div>
+    );
+  }
+
   return (
     <m.div
-      initial={{ opacity: 0, y: isMobile ? 10 : 30 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: isMobile ? "0px" : "-10%" }}
-      transition={{ duration: isMobile ? 0.4 : 1, delay: isMobile ? 0 : delay, ease: [0.16, 1, 0.3, 1] }}
+      viewport={{ once: true, margin: "-10%" }}
+      transition={{ duration: 1, delay, ease: [0.16, 1, 0.3, 1] }}
       style={{ willChange: "transform, opacity" }}
       className={className}
     >
