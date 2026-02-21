@@ -197,8 +197,8 @@ export default function App() {
               transition={{ delay: 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               className="max-w-4xl mx-auto space-y-8"
             >
-              <h1 className="text-4xl md:text-7xl font-semibold leading-[1.05] tracking-tighter text-[#1d1d1f]">
-                <GradientText>Pare de analisar</GradientText><br /> concorrente no olho.
+              <h1 className="text-4xl sm:text-5xl md:text-7xl font-semibold leading-[1.1] md:leading-[1.05] tracking-tighter text-[#1d1d1f] break-words">
+                <GradientText>Pare de analisar</GradientText><br className="hidden sm:block" /> concorrente no olho.
               </h1>
               <p className="text-xl md:text-2xl font-light tracking-tight text-[#515154] max-w-2xl mx-auto">
                 Existe uma maneira mais inteligente de criar conteúdo que performa — e ela não envolve horas de análise manual.
@@ -243,7 +243,7 @@ export default function App() {
           <div className="max-w-[1000px] mx-auto px-6 relative z-10">
             <FadeInText>
               <h3 className="text-[#86868b] font-medium tracking-widest uppercase text-sm md:text-base mb-6">A Dor do Avatar</h3>
-              <p className="text-4xl md:text-6xl font-medium tracking-tight leading-[1.1] mb-16 text-[#1d1d1f]">
+              <p className="text-3xl sm:text-4xl md:text-6xl font-medium tracking-tight leading-[1.2] md:leading-[1.1] mb-16 text-[#1d1d1f] break-words">
                 Você já passou por isso: abriu o perfil do concorrente e ficou lá rolando por horas <GradientText>tentando entender o que funciona?</GradientText>
               </p>
             </FadeInText>
@@ -281,8 +281,8 @@ export default function App() {
         {/* SECTION 3: A SOLUÇÃO - Large Feature Showcase */}
         <Section id="solution">
           <div className="text-center mb-24 md:mb-32">
-            <FadeInText delay={0.1}>
-              <h2 className="text-6xl md:text-8xl font-semibold tracking-tighter mb-8 text-[#1d1d1f]">
+            <FadeInText delay={0.1} className="px-4">
+              <h2 className="text-5xl sm:text-6xl md:text-8xl font-semibold tracking-tighter mb-8 text-[#1d1d1f] break-words">
                 Apresentando o <GradientText>TRENDIX</GradientText>.
               </h2>
               <p className="text-2xl md:text-4xl font-light tracking-tight text-[#515154] max-w-4xl mx-auto leading-tight">
@@ -303,7 +303,7 @@ export default function App() {
             <div className="absolute inset-0 bg-gradient-to-br from-purple-900/40 via-transparent to-pink-900/40 opacity-50"></div>
 
             <FadeInText className="relative z-10" delay={0.2}>
-              <h3 className="text-4xl md:text-6xl font-medium tracking-tight mb-8 text-white">Você cola o link. O TRENDIX analisa tudo.</h3>
+              <h3 className="text-3xl sm:text-4xl md:text-6xl font-medium tracking-tight mb-8 text-white break-words leading-[1.2]">Você cola o link. O TRENDIX analisa tudo.</h3>
               <p className="text-xl md:text-2xl font-light text-gray-400 max-w-4xl mx-auto mb-16 leading-relaxed">
                 Descubra os <span className="text-pink-400 font-medium">formatos que performam</span>, o que funciona para ser modelado, e o que não funciona como oportunidade.  Receba dezenas de <span className="text-purple-400 font-medium">ideias de conteúdo</span> baseadas em padrões reais e um relatório pronto gerado por IA para impressionar seu cliente.
               </p>
@@ -316,8 +316,8 @@ export default function App() {
 
         {/* SECTION 4: A EQUAÇÃO DE VALOR - Bento Grid */}
         <Section id="features" className="bg-white">
-          <div className="mb-20">
-            <h2 className="text-5xl md:text-7xl font-semibold tracking-tighter text-[#1d1d1f]">Por que é diferente.</h2>
+          <div className="mb-16 md:mb-20 px-2">
+            <h2 className="text-4xl sm:text-5xl md:text-7xl font-semibold tracking-tighter text-[#1d1d1f] break-words">Por que é diferente.</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[minmax(380px,auto)]">
@@ -331,7 +331,7 @@ export default function App() {
 
               <div className="relative z-10 mt-auto pt-40">
                 <h3 className="text-xs font-bold text-white/70 uppercase tracking-widest mb-3">Calendário Inteligente</h3>
-                <p className="text-3xl md:text-5xl font-medium tracking-tight leading-[1.1] max-w-xl text-white">
+                <p className="text-3xl md:text-5xl font-medium tracking-tight leading-[1.2] md:leading-[1.1] max-w-xl text-white break-words">
                   30 dias de pauta prontos gerados por <GradientText>IA</GradientText>.
                 </p>
                 <p className="text-white/80 mt-4 text-lg">Sem domingo perdido. Você informa o público e nós alinhamos com o que já funciona no mercado.</p>
@@ -381,7 +381,7 @@ export default function App() {
           <div className="max-w-[800px] mx-auto text-center">
             <FadeInText className="mb-20">
               <h3 className="text-[#86868b] font-medium tracking-widest uppercase text-sm md:text-base mb-6">Investimento</h3>
-              <h2 className="text-5xl md:text-7xl font-semibold tracking-tighter mb-6 text-[#1d1d1f]">Quanto valem 5 horas <br />do seu mês?</h2>
+              <h2 className="text-4xl sm:text-5xl md:text-7xl font-semibold tracking-tighter mb-6 text-[#1d1d1f] break-words leading-[1.1]">Quanto valem 5 horas <br className="hidden sm:block" />do seu mês?</h2>
               <p className="text-xl md:text-2xl font-light tracking-tight text-[#515154] mt-6">
                 Uma análise de concorrente terceirizada custa entre <span className="font-medium">R$300 e R$800</span>. Ferramentas gringas começam em <span className="font-medium text-pink-600">US$49/mês</span>.
               </p>
@@ -390,7 +390,7 @@ export default function App() {
             <FadeInText delay={0.2}>
               <div className="p-10 md:p-14 bg-[#1d1d1f] rounded-[40px] text-white shadow-2xl shadow-indigo-500/10">
                 <p className="text-xl font-light tracking-widest uppercase mb-4 text-purple-300">O TRENDIX faz tudo e mais.</p>
-                <div className="text-6xl md:text-8xl font-bold tracking-tighter mb-6">R$29<span className="text-4xl">,90</span><span className="text-2xl font-medium text-gray-400">/mês</span></div>
+                <div className="text-5xl sm:text-6xl md:text-8xl font-bold tracking-tighter mb-6 break-words">R$29<span className="text-3xl sm:text-4xl">,90</span><span className="text-xl sm:text-2xl font-medium text-gray-400">/mês</span></div>
                 <p className="text-lg md:text-xl font-light opacity-80 max-w-md mx-auto mb-10">Menos de R$1 por dia para criar com inteligência e parar de perder tempo. Uma refeição no iFood já custa mais.</p>
                 <div className="bg-white/10 rounded-2xl p-6 border border-white/20">
                   <p className="text-sm font-semibold text-gray-200">Se o TRENDIX te ajudar a manter 1 cliente a mais por mês, você já pagou o investimento em <GradientText>10 vezes</GradientText>.</p>
@@ -403,8 +403,8 @@ export default function App() {
         {/* SECTION 6: FAQ & QUEBRA DE OBJEÇÕES */}
         <section className="py-32 bg-white px-6 border-t border-gray-100">
           <div className="max-w-[1000px] mx-auto">
-            <FadeInText className="mb-16">
-              <h2 className="text-4xl md:text-6xl font-semibold tracking-tighter mb-4 text-[#1d1d1f]">Perguntas que você <br />pode ter agora.</h2>
+            <FadeInText className="mb-16 px-2">
+              <h2 className="text-4xl md:text-6xl font-semibold tracking-tighter mb-4 text-[#1d1d1f] break-words leading-[1.1]">Perguntas que você <br className="hidden md:block" />pode ter agora.</h2>
             </FadeInText>
 
             <div className="grid md:grid-cols-2 gap-8 md:gap-12">
@@ -439,8 +439,8 @@ export default function App() {
               Pré-Lançamento. Vagas Limitadas.
             </div>
 
-            <h2 className="text-6xl md:text-8xl font-semibold mb-10 tracking-tighter text-[#1d1d1f]">
-              Esse preço <br /> não vai durar.
+            <h2 className="text-5xl sm:text-6xl md:text-8xl font-semibold mb-8 md:mb-10 tracking-tighter text-[#1d1d1f] break-words leading-[1.1]">
+              Esse preço <br className="hidden md:block" /> não vai durar.
             </h2>
             <p className="text-2xl md:text-3xl font-light tracking-tight text-[#515154] mb-8 max-w-3xl mx-auto leading-relaxed">
               Os primeiros assinantes garantem o menor preço que essa ferramenta vai ter — <span className="font-semibold">para sempre</span>. Quem entrar agora sai na frente e trava o valor.
