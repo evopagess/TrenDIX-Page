@@ -1,6 +1,8 @@
 import { m, LazyMotion, useScroll, useTransform } from "motion/react";
 import { Check, ChevronRight, Clock, Zap, BarChart3, ShieldCheck, Star, ArrowRight, Menu, Sparkles, Filter, Activity, Target, Fingerprint, Hexagon, Component } from "lucide-react";
-import { ReactNode, useState, useEffect } from "react";
+import { ReactNode, useState, useEffect, lazy, Suspense } from "react";
+
+const InteractiveDotGrid = lazy(() => import("./components/InteractiveDotGrid"));
 
 // Luxuriant, performance-optimized Apple-style components
 const Section = ({ children, className = "", id = "" }: { children: ReactNode; className?: string; id?: string }) => (
@@ -125,17 +127,24 @@ export default function App() {
         {/* SECTION 1: HEADER / HEADLINE - Parallax Hero */}
         <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 pt-32 pb-12 overflow-hidden z-10">
 
-          {/* Perfomant CSS-only Background Effects */}
-          {/* Subtle Dot Pattern with Gradient Mask */}
-          <div
-            className="absolute inset-0 opacity-60 z-0 pointer-events-none"
-            style={{
-              backgroundImage: 'radial-gradient(#c0c0c8 1.5px, transparent 1.5px)',
-              backgroundSize: '32px 32px',
-              WebkitMaskImage: 'linear-gradient(to bottom, white 40%, transparent 100%)',
-              maskImage: 'linear-gradient(to bottom, white 40%, transparent 100%)'
-            }}
-          ></div>
+          {/* Perfomant Background Effects */}
+          {/* Interactive Dot Grid (Lazy loaded, strictly runs only on Desktop to protect Mobile 95+ score) */}
+          {!isMobile ? (
+            <Suspense fallback={<div className="absolute inset-0 opacity-60 z-0 pointer-events-none" style={{ backgroundImage: 'radial-gradient(#c0c0c8 1.5px, transparent 1.5px)', backgroundSize: '32px 32px', WebkitMaskImage: 'linear-gradient(to bottom, white 40%, transparent 100%)', maskImage: 'linear-gradient(to bottom, white 40%, transparent 100%)' }}></div>}>
+              <InteractiveDotGrid />
+            </Suspense>
+          ) : (
+            <div
+              className="absolute inset-0 opacity-60 z-0 pointer-events-none"
+              style={{
+                backgroundImage: 'radial-gradient(#c0c0c8 1.5px, transparent 1.5px)',
+                backgroundSize: '32px 32px',
+                WebkitMaskImage: 'linear-gradient(to bottom, white 40%, transparent 100%)',
+                maskImage: 'linear-gradient(to bottom, white 40%, transparent 100%)'
+              }}
+            ></div>
+          )}
+
           {/* Static Ambient Glow */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[500px] bg-gradient-to-b from-pink-300/20 via-purple-300/10 to-transparent blur-[80px] pointer-events-none z-0"></div>
 
