@@ -1,4 +1,4 @@
-import { m, LazyMotion, domAnimation, useScroll, useTransform } from "motion/react";
+import { m, LazyMotion, useScroll, useTransform } from "motion/react";
 import { Check, ChevronRight, Clock, Zap, BarChart3, ShieldCheck, Star, ArrowRight, Menu, Sparkles, Filter, Activity, Target, Fingerprint, Hexagon, Component } from "lucide-react";
 import { ReactNode, useState, useEffect } from "react";
 
@@ -61,23 +61,30 @@ export default function App() {
   const heroScale = useTransform(scrollY, [0, 800], [1, 0.95]);
 
   // Abstract Background Parallax (mapped to 0-1 percentage for entire page)
-  const bgImageY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]); // Trocado useSpring por scrollYProgress direto
+  const bgImageY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
   const floatY1 = useTransform(scrollY, [0, 3000], [0, -200]);
   const floatY2 = useTransform(scrollY, [0, 3000], [0, -300]);
 
+  const loadFeatures = () => import("motion/react").then(res => res.domAnimation);
+  const isMobile = window.innerWidth < 768; // Removed heavy DOM nodes on mobile entirely
+
   return (
-    <LazyMotion features={domAnimation}>
+    <LazyMotion features={loadFeatures} strict>
       <div className="min-h-screen bg-white text-[#1d1d1f] font-sans selection:bg-pink-100 selection:text-pink-900 overflow-hidden relative">
 
-        {/* Global Background Parallax Elements for Luxury Depth - Hidden on Mobile */}
-        <m.div
-          style={{ y: floatY1, willChange: "transform" }}
-          className="pointer-events-none absolute top-40 left-10 w-96 h-96 bg-pink-100/40 rounded-full blur-[100px] opacity-40 mix-blend-multiply transform-gpu hidden md:block"
-        />
-        <m.div
-          style={{ y: floatY2, willChange: "transform" }}
-          className="pointer-events-none absolute top-96 right-10 w-[500px] h-[500px] bg-purple-100/40 rounded-full blur-[120px] opacity-40 mix-blend-multiply transform-gpu hidden md:block"
-        />
+        {/* Global Background Parallax Elements for Luxury Depth - Removed from DOM on Mobile */}
+        {!isMobile && (
+          <>
+            <m.div
+              style={{ y: floatY1, willChange: "transform" }}
+              className="pointer-events-none absolute top-40 left-10 w-96 h-96 bg-pink-100/40 rounded-full blur-[100px] opacity-40 mix-blend-multiply transform-gpu"
+            />
+            <m.div
+              style={{ y: floatY2, willChange: "transform" }}
+              className="pointer-events-none absolute top-96 right-10 w-[500px] h-[500px] bg-purple-100/40 rounded-full blur-[120px] opacity-40 mix-blend-multiply transform-gpu"
+            />
+          </>
+        )}
 
         {/* Navbar - Apple Style Light */}
         <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-lg transform-gpu border-b border-black/5 h-16 flex items-center justify-center text-xs font-medium text-[#1d1d1f] tracking-wide transition-all duration-300">
@@ -136,14 +143,14 @@ export default function App() {
             </m.div>
 
             <m.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ delay: 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               className="max-w-4xl mx-auto space-y-8"
             >
-              <h2 className="text-4xl md:text-7xl font-semibold leading-[1.05] tracking-tighter text-[#1d1d1f]">
+              <h1 className="text-4xl md:text-7xl font-semibold leading-[1.05] tracking-tighter text-[#1d1d1f]">
                 <GradientText>Pare de analisar</GradientText><br /> concorrente no olho.
-              </h2>
+              </h1>
               <p className="text-xl md:text-2xl font-light tracking-tight text-[#515154] max-w-2xl mx-auto">
                 Existe uma maneira mais inteligente de criar conteúdo que performa — e ela não envolve horas de análise manual.
               </p>
