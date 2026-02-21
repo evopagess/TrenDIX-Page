@@ -13,7 +13,7 @@ const Section = ({ children, className = "", id = "" }: { children: ReactNode; c
 
 const BentoCard = ({ children, className = "", delay = 0, yOffset = 60 }: { children: ReactNode; className?: string; delay?: number; yOffset?: number }) => {
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-  const baseClassName = `bg-white/95 md:bg-[#f5f5f7]/60 backdrop-blur-none md:backdrop-blur-md transform-gpu rounded-[32px] md:rounded-[40px] overflow-hidden hover:shadow-2xl transition-all duration-700 border border-black/5 md:border-white/50 ${className}`;
+  const baseClassName = `bg-white/95 md:bg-[#f5f5f7]/60 backdrop-blur-none md:backdrop-blur-md rounded-[32px] md:rounded-[40px] overflow-hidden hover:shadow-2xl transition-shadow duration-700 border border-black/5 md:border-white/50 ${className}`;
 
   return (
     <m.div
@@ -21,7 +21,7 @@ const BentoCard = ({ children, className = "", delay = 0, yOffset = 60 }: { chil
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: isMobile ? "0px" : "-10%" }}
       transition={{ duration: isMobile ? 0.6 : 1, delay: isMobile ? 0 : delay, ease: [0.16, 1, 0.3, 1] }}
-      style={{ willChange: "transform, opacity" }}
+      style={{ willChange: isMobile ? "auto" : "transform, opacity" }}
       className={baseClassName}
     >
       {children}
@@ -38,7 +38,7 @@ const FadeInText = ({ children, className = "", delay = 0 }: { children: ReactNo
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: isMobile ? "0px" : "-10%" }}
       transition={{ duration: isMobile ? 0.6 : 1, delay: isMobile ? 0 : delay, ease: [0.16, 1, 0.3, 1] }}
-      style={{ willChange: "transform, opacity" }}
+      style={{ willChange: isMobile ? "auto" : "transform, opacity" }}
       className={className}
     >
       {children}
