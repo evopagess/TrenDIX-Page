@@ -148,8 +148,8 @@ export default function App() {
             </p>
 
             <div className="pt-8">
-              <a href="#pricing" className="inline-flex items-center gap-3 bg-[#1d1d1f] hover:bg-black text-white px-10 py-5 rounded-full text-lg md:text-xl font-medium transition-all shadow-2xl hover:shadow-3xl hover:scale-[1.02]">
-                Assista ao vídeo <ChevronRight className="w-5 h-5" />
+              <a href="#pricing" aria-label="Ir para a seção de preços para assinar o TRENDIX" className="inline-flex items-center gap-3 bg-[#1d1d1f] hover:bg-black text-white px-10 py-5 rounded-full text-lg md:text-xl font-medium transition-all shadow-2xl hover:shadow-3xl hover:scale-[1.02] focus:outline-none focus:ring-4 focus:ring-pink-500/50">
+                Assista ao vídeo <ChevronRight className="w-5 h-5" aria-hidden="true" />
               </a>
             </div>
           </motion.div>
@@ -166,7 +166,7 @@ export default function App() {
               <div className="w-20 h-20 md:w-32 md:h-32 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.1)] mb-4 transition-transform duration-700 hover:scale-110 cursor-pointer">
                 <div className="w-0 h-0 border-t-[12px] md:border-t-[20px] border-t-transparent border-l-[20px] md:border-l-[32px] border-l-[#1d1d1f] border-b-[12px] md:border-b-[20px] border-b-transparent ml-2 md:ml-3"></div>
               </div>
-              <p className="font-medium text-[#1d1d1f]/60 tracking-wider uppercase text-xs md:text-sm mt-4">Assista ao vídeo antes de continuar</p>
+              <p className="font-semibold text-[#1d1d1f]/80 tracking-wider uppercase text-xs md:text-sm mt-4">Assista ao vídeo antes de continuar</p>
             </div>
             {/* Parallax Background inside the frame (Luxurious Geometric CSS instead of AI image) */}
             <motion.div
@@ -277,7 +277,7 @@ export default function App() {
               <p className="text-3xl md:text-5xl font-medium tracking-tight leading-[1.1] max-w-xl text-white">
                 30 dias de pauta prontos gerados por <GradientText>IA</GradientText>.
               </p>
-              <p className="text-white/60 mt-4 text-lg">Sem domingo perdido. Você informa o público e nós alinhamos com o que já funciona no mercado.</p>
+              <p className="text-white/80 mt-4 text-lg">Sem domingo perdido. Você informa o público e nós alinhamos com o que já funciona no mercado.</p>
             </div>
           </BentoCard>
 
@@ -336,7 +336,7 @@ export default function App() {
               <div className="text-6xl md:text-8xl font-bold tracking-tighter mb-6">R$29<span className="text-4xl">,90</span><span className="text-2xl font-medium text-gray-400">/mês</span></div>
               <p className="text-lg md:text-xl font-light opacity-80 max-w-md mx-auto mb-10">Menos de R$1 por dia para criar com inteligência e parar de perder tempo. Uma refeição no iFood já custa mais.</p>
               <div className="bg-white/10 rounded-2xl p-6 border border-white/20">
-                <p className="text-sm font-medium">Se o TRENDIX te ajudar a manter 1 cliente a mais por mês, você já pagou o investimento em <GradientText>10 vezes</GradientText>.</p>
+                <p className="text-sm font-semibold text-gray-200">Se o TRENDIX te ajudar a manter 1 cliente a mais por mês, você já pagou o investimento em <GradientText>10 vezes</GradientText>.</p>
               </div>
             </div>
           </FadeInText>
@@ -395,13 +395,14 @@ export default function App() {
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
               style={{ willChange: "transform" }}
-              className="w-full md:w-auto relative inline-flex items-center justify-center px-10 md:px-14 py-6 md:py-8 text-xl md:text-2xl font-medium tracking-tight text-white bg-[#1d1d1f] hover:bg-black rounded-full transition-all shadow-2xl hover:shadow-[0_20px_40px_rgba(0,0,0,0.2)]"
+              aria-label="Botão para assinar o TRENDIX com preço de fundador"
+              className="w-full md:w-auto relative inline-flex items-center justify-center px-10 md:px-14 py-6 md:py-8 text-xl md:text-2xl font-medium tracking-tight text-white bg-[#1d1d1f] hover:bg-black rounded-full transition-all shadow-2xl hover:shadow-[0_20px_40px_rgba(0,0,0,0.2)] focus:outline-none focus:ring-4 focus:ring-pink-500/50"
             >
               TRAVAR PREÇO DE FUNDADOR
-              <ArrowRight className="ml-4 w-6 h-6 group-hover:translate-x-2 transition-transform" />
+              <ArrowRight className="ml-4 w-6 h-6 group-hover:translate-x-2 transition-transform" aria-hidden="true" />
             </motion.button>
             <span className="text-lg text-[#515154] font-medium hidden md:block">ou</span>
-            <a href="#problem" className="text-lg text-[#1d1d1f] underline font-medium opacity-60 hover:opacity-100 transition-opacity">continue analisando no olho.</a>
+            <a href="#problem" aria-label="Voltar para a seção do problema" className="text-lg text-[#1d1d1f] underline font-medium opacity-80 hover:opacity-100 transition-opacity focus:outline-none focus:ring-2 focus:ring-pink-500 rounded px-2">continue analisando no olho.</a>
           </motion.div>
         </FadeInText>
       </section>
@@ -411,8 +412,8 @@ export default function App() {
         <div className="max-w-[1200px] mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
           <p>&copy; {new Date().getFullYear()} TRENDIX. Todos os direitos reservados.</p>
           <div className="flex gap-8">
-            <a href="#" className="hover:text-[#1d1d1f] transition-colors">Política de Privacidade</a>
-            <a href="#" className="hover:text-[#1d1d1f] transition-colors">Termos de Uso</a>
+            <a href="#" aria-label="Ler Política de Privacidade" className="hover:text-[#1d1d1f] text-[#515154] transition-colors focus:outline-none focus:ring-2 focus:ring-pink-500 rounded px-1">Política de Privacidade</a>
+            <a href="#" aria-label="Ler Termos de Uso" className="hover:text-[#1d1d1f] text-[#515154] transition-colors focus:outline-none focus:ring-2 focus:ring-pink-500 rounded px-1">Termos de Uso</a>
           </div>
         </div>
       </footer>
