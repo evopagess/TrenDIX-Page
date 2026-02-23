@@ -3,6 +3,7 @@ import { Check, ChevronRight, Timer, Zap, AreaChart, ShieldCheck, Star, ArrowRig
 import { ReactNode, useState, useEffect, lazy, Suspense, useId } from "react";
 
 const InteractiveDotGrid = lazy(() => import("./components/InteractiveDotGrid"));
+const HeroEffect = lazy(() => import("./components/HeroEffect"));
 
 // Luxuriant, performance-optimized Apple-style components
 const Section = ({ children, className = "", id = "" }: { children: ReactNode; className?: string; id?: string }) => (
@@ -189,6 +190,13 @@ export default function App() {
         <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 pt-32 pb-12 overflow-hidden z-10">
 
           {/* Perfomant Background Effects */}
+          {/* Interactive Hero Effect (Lazy loaded) */}
+          {!isMobile && (
+            <Suspense fallback={null}>
+              <HeroEffect />
+            </Suspense>
+          )}
+
           {/* Interactive Dot Grid (Lazy loaded, strictly runs only on Desktop to protect Mobile 95+ score) */}
           {!isMobile ? (
             <Suspense fallback={<div className="absolute inset-0 opacity-60 z-0 pointer-events-none" style={{ backgroundImage: 'radial-gradient(#c0c0c8 1.5px, transparent 1.5px)', backgroundSize: '32px 32px', WebkitMaskImage: 'linear-gradient(to bottom, white 40%, transparent 100%)', maskImage: 'linear-gradient(to bottom, white 40%, transparent 100%)' }}></div>}>
@@ -280,10 +288,10 @@ export default function App() {
 
         {/* SECTION 2: O PROBLEMA - Light Mode Spotlight / Widescreen */}
         <section id="problem" className="bg-[#f5f5f7] py-32 md:py-48 rounded-[40px] md:rounded-[80px] mx-2 md:mx-6 shadow-sm overflow-hidden relative">
-          <div className="max-w-[1000px] mx-auto px-6 relative z-10">
+          <div className="max-w-[1200px] mx-auto px-6 relative z-10">
             <FadeInText>
               <h3 className="text-[#86868b] font-medium tracking-widest uppercase text-sm md:text-base mb-6">A Dor do Avatar</h3>
-              <p className="text-3xl sm:text-4xl md:text-6xl font-medium tracking-tight leading-[1.2] md:leading-[1.1] mb-16 text-[#1d1d1f] break-words">
+              <p className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight leading-[1.2] md:leading-[1.1] mb-16 text-[#1d1d1f] break-words">
                 Você já passou por isso: abriu o perfil do concorrente e ficou lá rolando por horas <GradientText>tentando entender o que funciona?</GradientText>
               </p>
             </FadeInText>
@@ -343,6 +351,20 @@ export default function App() {
               <p className="text-xl md:text-2xl font-light text-gray-400 max-w-4xl mx-auto mb-16 leading-relaxed">
                 Descubra os <span className="text-pink-400 font-medium">formatos que performam</span>, o que funciona para ser modelado, e o que não funciona como oportunidade.  Receba dezenas de <span className="text-purple-400 font-medium">ideias de conteúdo</span> baseadas em padrões reais e um relatório pronto gerado por IA para impressionar seu cliente.
               </p>
+
+              {/* Solution Mockup Visual */}
+              <div className="max-w-xl mx-auto mb-16 relative">
+                <div className="absolute -inset-1 bg-gradient-to-r from-pink-500 to-purple-600 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
+                <div className="relative bg-black border border-white/10 rounded-2xl p-4 flex items-center gap-4">
+                  <div className="flex-1 text-left text-gray-500 font-light text-sm md:text-base truncate px-2">
+                    https://www.instagram.com/p/C4_x...
+                  </div>
+                  <div className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-2 rounded-xl font-medium text-sm md:text-base whitespace-nowrap">
+                    Analisar Agora
+                  </div>
+                </div>
+              </div>
+
               <div className="inline-flex items-center justify-center w-28 h-28 rounded-[30px] bg-gradient-to-br from-[#1d1d1f] to-[#3a3a3c] border border-white/10 text-white shadow-2xl shadow-indigo-500/10 hover:scale-105 transition-transform duration-500 cursor-default group">
                 <Fingerprint strokeWidth={0.5} className="w-14 h-14 fill-transparent text-pink-300 group-hover:text-purple-300 transition-colors" />
               </div>
