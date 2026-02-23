@@ -1,6 +1,6 @@
 import { m, LazyMotion, useScroll, useTransform } from "motion/react";
-import { Check, ChevronRight, Clock, Zap, BarChart3, ShieldCheck, Star, ArrowRight, Menu, Sparkles, Filter, Activity, Target, Fingerprint, Hexagon, Component } from "lucide-react";
-import { ReactNode, useState, useEffect, lazy, Suspense } from "react";
+import { Check, ChevronRight, Timer, Zap, AreaChart, ShieldCheck, Star, ArrowRight, Menu, Sparkles, Filter, Activity, Target, Fingerprint, Hexagon, Component, History, TrendingUpDown } from "lucide-react";
+import { ReactNode, useState, useEffect, lazy, Suspense, useId } from "react";
 
 const InteractiveDotGrid = lazy(() => import("./components/InteractiveDotGrid"));
 
@@ -51,6 +51,49 @@ const GradientText = ({ children }: { children: ReactNode }) => (
     {children}
   </span>
 );
+
+const PremiumIcon = ({ icon: Icon, color = "pink", delay = 0 }: { icon: any; color?: "pink" | "purple" | "indigo"; delay?: number }) => {
+  const id = useId();
+  const colors = {
+    pink: {
+      bg: "bg-pink-50/50",
+      border: "border-pink-200/50",
+      glow: "shadow-pink-500/20",
+      gradient: ["#ec4899", "#d946ef"]
+    },
+    purple: {
+      bg: "bg-purple-50/50",
+      border: "border-purple-200/50",
+      glow: "shadow-purple-500/20",
+      gradient: ["#a855f7", "#8b5cf6"]
+    },
+    indigo: {
+      bg: "bg-indigo-50/50",
+      border: "border-indigo-200/50",
+      glow: "shadow-indigo-500/20",
+      gradient: ["#6366f1", "#4f46e5"]
+    }
+  };
+
+  const selected = colors[color];
+
+  return (
+    <div className="relative group/icon mb-8">
+      <svg width="0" height="0" className="absolute">
+        <defs>
+          <linearGradient id={`grad-${id}`} x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor={selected.gradient[0]} />
+            <stop offset="100%" stopColor={selected.gradient[1]} />
+          </linearGradient>
+        </defs>
+      </svg>
+      <div className={`w-16 h-16 ${selected.bg} backdrop-blur-xl rounded-2xl flex items-center justify-center border ${selected.border} shadow-lg ${selected.glow} transition-all duration-500 group-hover/icon:scale-110 group-hover/icon:rotate-3 relative z-10`}>
+        <Icon stroke={`url(#grad-${id})`} strokeWidth={1.5} className="w-8 h-8" />
+      </div>
+      <div className={`absolute inset-0 ${selected.bg} blur-2xl opacity-0 group-hover/icon:opacity-40 transition-opacity duration-500 rounded-full`}></div>
+    </div>
+  );
+};
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -186,9 +229,6 @@ export default function App() {
                 decoding="async"
                 className="h-20 md:h-28 mx-auto mb-6 object-contain"
               />
-              <p className="text-xl md:text-3xl font-medium tracking-tight text-[#515154]">
-                Inteligência <GradientText>Viral</GradientText>.
-              </p>
             </m.div>
 
             <m.div
@@ -250,9 +290,7 @@ export default function App() {
 
             <div className="grid md:grid-cols-2 gap-6 md:gap-10 mt-16 md:mt-24">
               <BentoCard className="bg-white p-12 hover:bg-white/90 group cursor-default">
-                <div className="w-14 h-14 bg-red-50 rounded-2xl flex items-center justify-center mb-8 transition-transform duration-500 group-hover:scale-110">
-                  <Clock strokeWidth={1} className="w-7 h-7 text-red-500" />
-                </div>
+                <PremiumIcon icon={History} color="pink" />
                 <h4 className="text-3xl font-medium tracking-tight mb-4 text-[#1d1d1f]">Análise Amadora</h4>
                 <p className="text-[#515154] text-xl font-light leading-relaxed">
                   Criou uma planilha que ficou desatualizada em 2 semanas e entregou um relatório baseado em <span className="text-pink-600 font-medium">'achismo'</span> porque não tinha dados concretos.
@@ -260,9 +298,7 @@ export default function App() {
               </BentoCard>
 
               <BentoCard className="bg-white p-12 hover:bg-white/90 group cursor-default" delay={0.15}>
-                <div className="w-14 h-14 bg-purple-50 rounded-2xl flex items-center justify-center mb-8 transition-transform duration-500 group-hover:scale-110">
-                  <BarChart3 strokeWidth={1} className="w-7 h-7 text-purple-600" />
-                </div>
+                <PremiumIcon icon={AreaChart} color="purple" />
                 <h4 className="text-3xl font-medium tracking-tight mb-4 text-[#1d1d1f]">Falta de Direção</h4>
                 <p className="text-[#515154] text-xl font-light leading-relaxed">
                   Passou o domingo pensando em pauta, saiu sem clareza e viu o concorrente explodir enquanto você postava <span className="text-purple-600 font-medium">as mesmas coisas sem resultado</span>.
